@@ -14,7 +14,9 @@ export const Backdrop = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
+export const ModalBlock = styled.div`
+  width: 438px;
+`;
 export const ModalContainer = styled.div`
   background-color: white;
 

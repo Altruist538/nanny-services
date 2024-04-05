@@ -10,7 +10,7 @@ export const LogoStatic = styled.p`
 `;
 
 export const HeaderBlock = styled.div`
-  width: 1440px;
+  /* width: 1440px; */
   height: 88px;
   margin-right: auto;
   margin-left: auto;
@@ -38,6 +38,20 @@ export const ButtonLogo = styled.button`
   }
 `;
 
+export const PersonIcon = styled.div`
+  margin-right: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #fbfbfb;
+`;
+export const PersonData = styled.div`
+  display: flex;
+  align-items: center;
+`;
 export const LinkHome = styled(NavLink)`
   display: inline-block;
   text-decoration: none;
@@ -63,11 +77,9 @@ export const LinkHome = styled(NavLink)`
 
   &:hover {
     color: #fbfbfb;
-
-    text-shadow: 0px 14px 14px rgba(0, 0, 0, 0.25);
-    -webkit-text-stroke-width: 1;
-    -webkit-text-stroke-color: #000;
-
-    letter-spacing: -0.16px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* -webkit-text-stroke-width: 1; */
+    /* -webkit-text-stroke-color: #000;
+    letter-spacing: -0.16px; */
   }
 `;

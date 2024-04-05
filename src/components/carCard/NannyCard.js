@@ -1,98 +1,124 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
-  ImgCar,
-  BlockBigllInfo,
-  BigllInfo,
-  BigllInfoBlue,
-  SmallInfo,
-  HeartImg,
-  HeartButton,
-  LearnMoretButton,
-  BigllInfoPpice,
+  AvatarImg,
+  BlockCard,
+  ListInfo,
+  Container,
+  TitlesInfo,
+  Titles,
+  ValueInfo,
+  ModuleInfo,
+  BlockInfo,
+  Litera,
+  ButtonMore,
 } from './NannyCard.styled';
-import imgDefault from '../../data/car-d.jpg';
-import iconHeart from '../../data/heart.svg';
-import iconHeartActiv from '../../data/heartblue.svg';
-import CarModal from '../Modal/CarModal';
-import { toggleFavorite } from 'redux/favoritesSlice';
-export const NannyCard = ({ car }) => {
+import Star from '../../data/star.svg';
+function calculateAge(birthDate) {
+  const birthDateObj = new Date(birthDate);
+  const currentDate = new Date();
+  const differenceMs = currentDate - birthDateObj;
+  const ageMs = new Date(differenceMs);
+  const age = Math.abs(ageMs.getUTCFullYear() - 1970);
+  return age;
+}
+export const NannyCard = ({ nannyData }) => {
+  const [isOpenReviews, setIsOpenReviews] = useState(false);
+  const toggleReviews = event => {
+    event.preventDefault();
+    setIsOpenReviews(!isOpenReviews);
+  };
+  if (!nannyData) {
+    return null;
+  }
+  // console.log(nannyData);
   const {
-    id,
-    make,
-    img,
-    model,
-    year,
-    rentalPrice,
-    address,
-    rentalCompany,
-    type,
-    functionalities,
-  } = car;
-
-  const dispatch = useDispatch();
-  const favorites = useSelector(state => state.favorites.items);
-
-  const [isOpenedModal, setIsOpenedModal] = useState(false);
-  const handleToggleModal = () => {
-    setIsOpenedModal(prevState => !prevState);
-    if (isOpenedModal === true) {
-      document.body.style.overflow = 'scroll';
-    }
-    if (isOpenedModal === false) {
-      document.body.style.overflow = 'hidden';
-    }
-  };
-
-  const closeModal = () => {
-    setIsOpenedModal(false);
-    document.body.style.overflow = 'scroll';
-  };
-
+    name,
+    avatar_url,
+    birthday,
+    experience,
+    reviews,
+    education,
+    kids_age,
+    price_per_hour,
+    location,
+    about,
+    characters,
+    rating,
+  } = nannyData;
+  const age = calculateAge(birthday);
   return (
-    <>
-      {isOpenedModal && (
-        <CarModal
-          handleToggleModal={handleToggleModal}
-          closeModal={closeModal}
-          car={car}
-        />
-      )}
-      <HeartButton>
-        {!favorites.includes(car.id) && (
-          <HeartImg
-            src={iconHeart}
-            alt={make}
-            onClick={() => dispatch(toggleFavorite(car.id))}
-          />
-        )}
+    <Container>
+      <AvatarImg src={avatar_url} alt="Avatar nanny" />
+      <BlockCard>
+        <BlockInfo>
+          <Titles>Nanny</Titles>
+          <ListInfo>
+            <ModuleInfo>
+              <ValueInfo>{location}</ValueInfo>
+            </ModuleInfo>
+            <ModuleInfo>
+              <TitlesInfo>Rating:</TitlesInfo> <ValueInfo>{rating}</ValueInfo>
+            </ModuleInfo>
+            <ModuleInfo>
+              <TitlesInfo>Price / 1 hour: </TitlesInfo>
+              <ValueInfo>{price_per_hour}$</ValueInfo>
+            </ModuleInfo>
+          </ListInfo>
+        </BlockInfo>
+        <h3>{name}</h3>
+        <ListInfo>
+          <ModuleInfo>
+            <TitlesInfo>Age:</TitlesInfo>
+            <ValueInfo>{age}</ValueInfo>
+          </ModuleInfo>
+          <ModuleInfo>
+            <TitlesInfo>Experience:</TitlesInfo>
+            <ValueInfo>{experience}</ValueInfo>
+          </ModuleInfo>
+          <ModuleInfo>
+            <TitlesInfo>Kids Age: </TitlesInfo>
+            <ValueInfo>{kids_age}</ValueInfo>
+          </ModuleInfo>
+          {/* <p>Characters: {characters}</p> */}
+          <ModuleInfo>
+            <TitlesInfo>Education: </TitlesInfo>
+            <ValueInfo>{education}</ValueInfo>
+          </ModuleInfo>
+        </ListInfo>
+        <div>
+          <Titles>{about}</Titles>
+          {/* <p>{reviews}</p> */}
+        </div>
 
-        {favorites.includes(car.id) && (
-          <HeartImg
-            src={iconHeartActiv}
-            alt={make}
-            onClick={() => dispatch(toggleFavorite(car.id))}
-          />
+        {!isOpenReviews && (
+          <ButtonMore href="" onClick={toggleReviews}>
+            Read more
+          </ButtonMore>
         )}
-      </HeartButton>
-      <ImgCar src={img || imgDefault} alt={make} />
-
-      <BlockBigllInfo>
-        <BigllInfo>
-          {make} <BigllInfoBlue>{model},</BigllInfoBlue> {year}
-        </BigllInfo>
-        <BigllInfoPpice> {rentalPrice}</BigllInfoPpice>
-      </BlockBigllInfo>
-      <SmallInfo>
-        {address.split(',').slice(-2).join(' | ')} | {rentalCompany}
-      </SmallInfo>
-      <SmallInfo>
-        {type} | {make} | {id} | {functionalities[0]}
-      </SmallInfo>
-      <LearnMoretButton type="button" onClick={handleToggleModal}>
-        Learn more
-      </LearnMoretButton>
-    </>
+        <div>
+          {isOpenReviews && (
+            <>
+              {reviews.map((data, index) => (
+                <div key={index}>
+                  <ListInfo>
+                    <Litera>{data.reviewer.charAt(0)}</Litera>
+                    <div>
+                      <h3>{data.reviewer}</h3>
+                      <ModuleInfo>
+                        <img width="16" height="16" src={Star} alt="icon" />
+                        <p>{data.rating}</p>
+                      </ModuleInfo>
+                    </div>
+                  </ListInfo>
+                  <p>{data.comment}</p>
+                </div>
+              ))}
+              <button onClick={toggleReviews}>Close</button>
+            </>
+          )}
+        </div>
+      </BlockCard>
+    </Container>
   );
 };

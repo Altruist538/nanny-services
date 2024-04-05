@@ -1,19 +1,28 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Home from 'pages/Home';
-import Header from './Header/header';
-// import Catalog from 'pages/catalog';
-// import Favorites from 'pages/favorites';
+import { useAuth } from 'hooks/use-auth';
+import Nanny from 'pages/Nanny';
+import Favorites from 'pages/Favorites';
 
 export const App = () => {
+  const { isAuth } = useAuth();
+  const [isStatusLogIn, setIsStatusLogIn] = useState(false);
+  useEffect(() => {
+    setIsStatusLogIn(!!isAuth);
+  }, [isAuth]);
+
   return (
     <div>
-      <Header />
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/catalog" element={<Catalog />} />
-          <Route path="/favorites" element={<Favorites />} /> */}
-          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+          <Route path="/nanny" element={isStatusLogIn ? <Nanny /> : <Home />} />
+          <Route
+            path="/favorites"
+            element={isStatusLogIn ? <Favorites /> : <Home />}
+          />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </div>

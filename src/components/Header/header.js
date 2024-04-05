@@ -1,32 +1,22 @@
-// import { LinkHome, HeaderBlock, LogoStatic, ButtonLogo } from './header.styled';
-// import { Outlet } from 'react-router-dom';
-// const Header = () => {
-//   return (
-//     <div>
-//       <HeaderBlock>
-//         <LogoStatic>Nannies.Services</LogoStatic>
-//         <nav>
-//           <LinkHome to="/">Home</LinkHome>
-//           <LinkHome to="/catalog">Nannies</LinkHome>
-//           <LinkHome to="/favorites">Favorites</LinkHome>
-//         </nav>
-//         <div>
-//           <ButtonLogo type="button">Log Out</ButtonLogo>
-//         </div>
-//         <Outlet />
-//       </HeaderBlock>
-//     </div>
-//   );
-// };
-
-// export default Header;
 import React from 'react';
-import { LinkHome, HeaderBlock, LogoStatic, ButtonLogo } from './header.styled';
+import { useState, useEffect } from 'react';
+import { LinkHome, HeaderBlock, LogoStatic } from './header.styled';
 import { Outlet, useLocation } from 'react-router-dom';
+import PersonAndLogOut from 'components/PersonAndLogOut/PersonAndLogOut';
+import { useAuth } from 'hooks/use-auth';
 
 const Header = () => {
   const location = useLocation();
-
+  const [isStatusLogIn, setIsStatusLogIn] = useState(false);
+  const { isAuth, name, removeAuth } = useAuth();
+  // const isStatus = !!isAuth;
+  useEffect(() => {
+    setIsStatusLogIn(!!isAuth);
+  }, [isAuth]);
+  const removeAuthStatus = () => {
+    setIsStatusLogIn(!isStatusLogIn);
+    removeAuth();
+  };
   return (
     <div>
       <HeaderBlock>
@@ -38,12 +28,14 @@ const Header = () => {
           >
             Home
           </LinkHome>
+
           <LinkHome
-            to="/catalog"
-            className={location.pathname === '/catalog' ? 'active-link' : ''}
+            to="/nanny"
+            className={location.pathname === '/nanny' ? 'active-link' : ''}
           >
             Nannies
           </LinkHome>
+
           <LinkHome
             to="/favorites"
             className={location.pathname === '/favorites' ? 'active-link' : ''}
@@ -51,11 +43,9 @@ const Header = () => {
             Favorites
           </LinkHome>
         </nav>
-        <div>
-          <ButtonLogo type="button">Log Out</ButtonLogo>
-        </div>
-        <Outlet />
+        <PersonAndLogOut name={name} removeAuth={removeAuthStatus} />
       </HeaderBlock>
+      <Outlet />
     </div>
   );
 };
