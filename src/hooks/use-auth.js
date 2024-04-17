@@ -28,7 +28,7 @@
 //   };
 // }
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { setUser, removeUser } from '../store/userSlice';
 
 export function useAuth() {

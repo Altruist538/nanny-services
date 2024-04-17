@@ -26,8 +26,7 @@ const LoginForm = ({ clousModal }) => {
     email: '',
     password: '',
   };
-  // useEffect(() => {
-  // }, []);
+
   const onSubmit = values => {
     console.log(values.email);
     console.log(values.password);
@@ -43,8 +42,8 @@ const LoginForm = ({ clousModal }) => {
         });
       })
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error.code);
+        console.log(error.message);
       });
     clousModal();
   };
