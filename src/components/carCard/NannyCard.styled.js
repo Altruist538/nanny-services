@@ -35,10 +35,21 @@ export const Container = styled.div`
   background-color: #fbfbfb;
 `;
 
+export const BlockReviews = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+`;
 export const BlockInfo = styled.div`
   display: flex;
   width: 918px;
   justify-content: space-between;
+`;
+export const ListInfoTop = styled.ul`
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  /* gap: 10px; */
 `;
 export const ListInfo = styled.ul`
   display: flex;
@@ -55,13 +66,11 @@ export const BlockCard = styled.div`
   width: 992px;
 `;
 export const Titles = styled.p`
-  font-family: var(--font-family);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
-  line-height: 150%;
-  color: #8a8a89;
-  display: flex;
-  padding: 10px;
+  line-height: 125%;
+  color: rgba(17, 16, 28, 0.5);
+  margin-top: 25px;
 `;
 export const TitlesInfo = styled.span`
   font-family: var(--font-family);
@@ -81,8 +90,24 @@ export const ValueInfo = styled.span`
   line-height: 150%;
   color: #11101c;
   display: flex;
-  padding: 10px;
+  padding: 5px;
   white-space: nowrap;
+`;
+export const ValueInfoGreen = styled.span`
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #38cd3e;
+  display: flex;
+  /* padding: 10px; */
+  white-space: nowrap;
+`;
+export const ModuleInfoTop = styled.li`
+  display: flex;
+  align-items: center;
+  margin: 0;
+  /* height: 40px; */
 `;
 export const ModuleInfo = styled.li`
   display: flex;
@@ -105,6 +130,16 @@ export const Litera = styled.p`
   width: 44px;
   height: 44px;
   background-color: rgba(16, 57, 49, 0.2);
+`;
+export const ReviewerName = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  color: #11101c;
+  margin: 0;
 `;
 export const BigllInfoPpice = styled.p`
   margin-top: 14px;
@@ -160,6 +195,7 @@ export const ButtonMore = styled.a`
   text-decoration: underline;
   text-decoration-skip-ink: none;
   color: #11101c;
+  margin: 20px;
 `;
 export const LearnMoretButton = styled.button`
   margin-top: 28px;

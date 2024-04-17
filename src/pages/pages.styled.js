@@ -13,6 +13,10 @@ export const HomeContainer = styled.div`
   position: relative;
 `;
 
+export const Section = styled.div`
+  width: 1184px;
+  margin: auto;
+`;
 export const HomeLine = styled.div`
   width: 100%;
   position: absolute;
@@ -43,6 +47,9 @@ export const ButtonGrup = styled.div`
   display: flex;
   gap: 8px;
   justify-content: space-evenly;
+`;
+export const ButtonCentr = styled.div`
+  margin: 50px auto 100px;
 `;
 export const HeaderHome = styled.div`
   display: flex;

@@ -4,6 +4,7 @@ export const CustomSelectWrapper = styled.div`
   position: relative;
   width: 226px;
   margin-top: 64px;
+  margin-bottom: 40px;
 `;
 export const TitleSelect = styled.p`
   font-weight: 500;
@@ -25,7 +26,6 @@ export const SelectStyle = styled.div`
   background-color: #103931;
   position: relative;
 `;
-
 export const OptionsList = styled.ul`
   position: absolute;
   top: calc(100% + 5px);
@@ -36,8 +36,8 @@ export const OptionsList = styled.ul`
   border-radius: 14px;
   background: #fff;
   box-shadow: 0px 20px 69px 0px rgba(0, 0, 0, 0.07);
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 `;
+
 export const OptionItem = styled.li`
   padding: 10px 20px;
   color: rgba(17, 16, 28, 0.3);

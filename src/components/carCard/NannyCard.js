@@ -12,8 +12,15 @@ import {
   BlockInfo,
   Litera,
   ButtonMore,
+  ReviewerName,
+  ListInfoTop,
+  ModuleInfoTop,
+  ValueInfoGreen,
+  BlockReviews,
 } from './NannyCard.styled';
 import Star from '../../data/star.svg';
+import Map from '../../data/map-pin.svg';
+import { ButtonLogIn } from 'pages/pages.styled';
 function calculateAge(birthDate) {
   const birthDateObj = new Date(birthDate);
   const currentDate = new Date();
@@ -46,6 +53,9 @@ export const NannyCard = ({ nannyData }) => {
     characters,
     rating,
   } = nannyData;
+  const СharactersString = characters
+    .map(item => item.charAt(0).toUpperCase() + item.slice(1))
+    .join(', ');
   const age = calculateAge(birthday);
   return (
     <Container>
@@ -53,20 +63,25 @@ export const NannyCard = ({ nannyData }) => {
       <BlockCard>
         <BlockInfo>
           <Titles>Nanny</Titles>
-          <ListInfo>
-            <ModuleInfo>
+          <ListInfoTop>
+            <ModuleInfoTop>
+              <img width="16" height="20" src={Map} alt="icon" />
               <ValueInfo>{location}</ValueInfo>
-            </ModuleInfo>
-            <ModuleInfo>
+              <TitlesInfo>|</TitlesInfo>
+            </ModuleInfoTop>
+            <ModuleInfoTop>
+              <img width="16" height="16" src={Star} alt="icon" />
               <TitlesInfo>Rating:</TitlesInfo> <ValueInfo>{rating}</ValueInfo>
-            </ModuleInfo>
-            <ModuleInfo>
+              <TitlesInfo>|</TitlesInfo>
+            </ModuleInfoTop>
+
+            <ModuleInfoTop>
               <TitlesInfo>Price / 1 hour: </TitlesInfo>
-              <ValueInfo>{price_per_hour}$</ValueInfo>
-            </ModuleInfo>
-          </ListInfo>
+              <ValueInfoGreen>{price_per_hour}$</ValueInfoGreen>
+            </ModuleInfoTop>
+          </ListInfoTop>
         </BlockInfo>
-        <h3>{name}</h3>
+        <h2>{name}</h2>
         <ListInfo>
           <ModuleInfo>
             <TitlesInfo>Age:</TitlesInfo>
@@ -80,7 +95,11 @@ export const NannyCard = ({ nannyData }) => {
             <TitlesInfo>Kids Age: </TitlesInfo>
             <ValueInfo>{kids_age}</ValueInfo>
           </ModuleInfo>
-          {/* <p>Characters: {characters}</p> */}
+          <ModuleInfo>
+            <TitlesInfo>Characters: </TitlesInfo>
+            <ValueInfo>{СharactersString}</ValueInfo>
+          </ModuleInfo>
+
           <ModuleInfo>
             <TitlesInfo>Education: </TitlesInfo>
             <ValueInfo>{education}</ValueInfo>
@@ -88,7 +107,6 @@ export const NannyCard = ({ nannyData }) => {
         </ListInfo>
         <div>
           <Titles>{about}</Titles>
-          {/* <p>{reviews}</p> */}
         </div>
 
         {!isOpenReviews && (
@@ -96,7 +114,7 @@ export const NannyCard = ({ nannyData }) => {
             Read more
           </ButtonMore>
         )}
-        <div>
+        <BlockReviews>
           {isOpenReviews && (
             <>
               {reviews.map((data, index) => (
@@ -104,20 +122,24 @@ export const NannyCard = ({ nannyData }) => {
                   <ListInfo>
                     <Litera>{data.reviewer.charAt(0)}</Litera>
                     <div>
-                      <h3>{data.reviewer}</h3>
-                      <ModuleInfo>
+                      <ReviewerName>{data.reviewer}</ReviewerName>
+                      <ModuleInfoTop>
                         <img width="16" height="16" src={Star} alt="icon" />
-                        <p>{data.rating}</p>
-                      </ModuleInfo>
+                        <ValueInfo>{data.rating}</ValueInfo>
+                      </ModuleInfoTop>
                     </div>
                   </ListInfo>
                   <p>{data.comment}</p>
                 </div>
               ))}
-              <button onClick={toggleReviews}>Close</button>
+
+              <ButtonLogIn type="button">Make an appointment</ButtonLogIn>
+              <ButtonMore href="" onClick={toggleReviews}>
+                Close
+              </ButtonMore>
             </>
           )}
-        </div>
+        </BlockReviews>
       </BlockCard>
     </Container>
   );

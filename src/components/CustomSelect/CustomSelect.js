@@ -7,13 +7,14 @@ import {
   OptionItem,
 } from './CustomSelect.styled';
 
-export const CustomSelect = ({ options }) => {
+export const CustomSelect = ({ options, statusSelect }) => {
   const [isOpenSelect, setIsOpenSelect] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const selectRef = useRef();
 
   const handleOptionClick = option => {
     setSelectedOption(option);
+    statusSelect(option);
     setIsOpenSelect(false);
   };
 
@@ -36,7 +37,7 @@ export const CustomSelect = ({ options }) => {
       <SelectStyle onClick={() => setIsOpenSelect(!isOpenSelect)}>
         {selectedOption || 'Select an option'}
       </SelectStyle>
-      <OptionsList isOpen={isOpenSelect}>
+      <OptionsList style={{ display: isOpenSelect ? 'block' : 'none' }}>
         {options.map(option => (
           <OptionItem key={option} onClick={() => handleOptionClick(option)}>
             {option}
