@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -6,14 +6,16 @@ import {
   LabelEnter,
   FormInput,
   ButtonModalSubmit,
-  EyeIcon,
+  LabelEnterPassword,
+  ButtonpasswordVisibility,
 } from './RegisterForm.styled';
 import {
   getAuth,
   updateProfile,
   createUserWithEmailAndPassword,
 } from 'firebase/auth';
-import VisibilityIcon from '../../data/eye-off.png';
+import NoVisibilityIcon from '../../data/eye-off.svg';
+import VisibilityIcon from '../../data/eye.svg';
 const validationSchema = Yup.object().shape({
   username: Yup.string(),
   // required("Обов'язкове поле")
@@ -25,12 +27,15 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegistrationForm = ({ clousModal }) => {
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const initialValues = {
     username: '',
     email: '',
     password: '',
   };
-
+  const togglePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility);
+  };
   const onSubmit = values => {
     console.log(values.username);
     const auth = getAuth();
@@ -68,17 +73,25 @@ const RegistrationForm = ({ clousModal }) => {
               <FormInput type="email" name="email" placeholder="Email" />
               <ErrorMessage name="email" component="div" className="error" />
             </LabelEnter>
-            <LabelEnter style={{ position: 'relative' }}>
+            <LabelEnterPassword>
               <FormInput
-                type="password"
+                type={!passwordVisibility ? 'password' : 'text'}
                 name="password"
                 placeholder="Password"
               />
-              <EyeIcon>
-                <img src={VisibilityIcon} alt="icon" />
-              </EyeIcon>
+
+              <ButtonpasswordVisibility
+                type="button"
+                onClick={togglePasswordVisibility}
+              >
+                <img
+                  src={passwordVisibility ? VisibilityIcon : NoVisibilityIcon}
+                  alt="icon"
+                />
+              </ButtonpasswordVisibility>
+
               <ErrorMessage name="password" component="div" className="error" />
-            </LabelEnter>
+            </LabelEnterPassword>
             <ButtonModalSubmit type="submit">Sign Up</ButtonModalSubmit>
           </Form>
         )}

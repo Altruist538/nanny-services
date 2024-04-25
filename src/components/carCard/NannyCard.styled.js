@@ -58,6 +58,7 @@ export const ListInfo = styled.ul`
   gap: 10px;
 `;
 export const BlockCard = styled.div`
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -163,8 +164,8 @@ export const BigllInfoBlue = styled.span`
 `;
 export const HeartButton = styled.button`
   position: absolute;
-  top: 14px;
-  left: 234px;
+  top: 18px;
+  right: 0;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -176,8 +177,8 @@ export const HeartButton = styled.button`
   &:hover,
   :focus {
     transform: scale(1.2);
-    outline: none;
-    color: #000;
+    /* outline: none; */
+    /* color: #000; */
   }
 `;
 
@@ -243,3 +244,11 @@ export const LoadMoretButton = styled.button`
     color: #0b44cd;
   }
 `;
+// export const HeartButton = styled.button`
+//   cursor: pointer;
+//   background-color: #0000;
+//   border: none;
+//   position: absolute;
+//   top: 16px;
+//   right: 16px;
+// `;

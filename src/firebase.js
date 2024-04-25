@@ -10,6 +10,3 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 initializeApp(firebaseConfig);
-// const db = ref(getDatabase());
-// // const db = firebase.database();
-// console.log(db);

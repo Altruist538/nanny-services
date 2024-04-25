@@ -17,10 +17,15 @@ import {
   ModuleInfoTop,
   ValueInfoGreen,
   BlockReviews,
+  HeartButton,
 } from './NannyCard.styled';
+import { ButtonLogIn, ModalText, ModalTitle } from '../../pages/pages.styled';
 import Star from '../../data/star.svg';
 import Map from '../../data/map-pin.svg';
-import { ButtonLogIn } from 'pages/pages.styled';
+import Heart from '../../data/heart.svg';
+import HeartGreen from '../../data/heartgreen.svg';
+
+import ModalSkelet from 'components/Modal/ModalSkelet';
 function calculateAge(birthDate) {
   const birthDateObj = new Date(birthDate);
   const currentDate = new Date();
@@ -31,6 +36,8 @@ function calculateAge(birthDate) {
 }
 export const NannyCard = ({ nannyData }) => {
   const [isOpenReviews, setIsOpenReviews] = useState(false);
+  const [isOpenRegistr, setIsOpenRegistr] = useState(false);
+  const [isOpenHeart, setIsOpenHeart] = useState(false);
   const toggleReviews = event => {
     event.preventDefault();
     setIsOpenReviews(!isOpenReviews);
@@ -57,6 +64,12 @@ export const NannyCard = ({ nannyData }) => {
     .map(item => item.charAt(0).toUpperCase() + item.slice(1))
     .join(', ');
   const age = calculateAge(birthday);
+  const toggleModal = () => {
+    setIsOpenRegistr(!isOpenRegistr);
+  };
+  const toggleHeart = () => {
+    setIsOpenHeart(!isOpenHeart);
+  };
   return (
     <Container>
       <AvatarImg src={avatar_url} alt="Avatar nanny" />
@@ -133,14 +146,50 @@ export const NannyCard = ({ nannyData }) => {
                 </div>
               ))}
 
-              <ButtonLogIn type="button">Make an appointment</ButtonLogIn>
+              <ButtonLogIn type="button" onClick={toggleModal}>
+                Make an appointment
+              </ButtonLogIn>
               <ButtonMore href="" onClick={toggleReviews}>
                 Close
               </ButtonMore>
             </>
           )}
         </BlockReviews>
+        <HeartButton type="button" onClick={toggleHeart}>
+          <img
+            width="26"
+            height="26"
+            src={!isOpenHeart ? Heart : HeartGreen}
+            alt="icon"
+          />
+        </HeartButton>
       </BlockCard>
+
+      <ModalSkelet
+        isOpen={isOpenRegistr}
+        toggleModal={toggleModal}
+        ModalFilling={
+          <div>
+            <ModalTitle>Make an appointment with a babysitter</ModalTitle>
+            <ModalText>
+              Arranging a meeting with a caregiver for your child is the first
+              step to creating a safe and comfortable environment. Fill out the
+              form below so we can match you with the perfect care partner.
+            </ModalText>
+            <ListInfo>
+              <AvatarImg
+                src={avatar_url}
+                width="16"
+                height="64"
+                alt="Avatar nanny"
+              />
+              <Titles>Your nanny</Titles>
+              <h2>{name}</h2>
+            </ListInfo>
+            {/* <RegistrationForm clousModal={toggleModal} /> */}
+          </div>
+        }
+      />
     </Container>
   );
 };

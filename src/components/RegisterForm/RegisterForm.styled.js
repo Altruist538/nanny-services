@@ -19,6 +19,12 @@ export const LabelEnter = styled.label`
   flex-direction: column;
   margin-top: 16px;
 `;
+export const LabelEnterPassword = styled.label`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+`;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -49,5 +55,21 @@ export const EyeIcon = styled.span`
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
+
+  background-color: transparent;
+  border: none;
   cursor: pointer;
+  overflow: hidden;
+  outline: none;
+`;
+export const ButtonpasswordVisibility = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 `;

@@ -1,32 +1,3 @@
-// import { useSelector } from 'react-redux';
-// export function useAuth() {
-//   const { name, email, token, id } = useSelector(state => state.user);
-//   return {
-//     isAuth: !email,
-//     name,
-//     email,
-//     token,
-//     id,
-//   };
-// }
-
-// import { useSelector } from 'react-redux';
-
-// export function useAuth() {
-//   const { name, email, token, id } = useSelector(state => state.user);
-//   const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
-//   const initialIsAuth = storedIsAuthenticated
-//     ? JSON.parse(storedIsAuthenticated)
-//     : false;
-
-//   return {
-//     isAuth: initialIsAuth,
-//     name,
-//     email,
-//     token,
-//     id,
-//   };
-// }
 import { useSelector, useDispatch } from 'react-redux';
 // import { useEffect } from 'react';
 import { setUser, removeUser } from '../store/userSlice';

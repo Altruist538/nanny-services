@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, ErrorMessage } from 'formik';
 import {
   Container,
   LabelEnter,
   FormInput,
   ButtonModalSubmit,
-  EyeIcon,
+  LabelEnterPassword,
+  ButtonpasswordVisibility,
 } from './RegisterForm.styled';
-import VisibilityIcon from '../../data/eye-off.png';
+import NoVisibilityIcon from '../../data/eye-off.svg';
+import VisibilityIcon from '../../data/eye.svg';
 import * as Yup from 'yup';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 // import { error } from 'jquery';
@@ -26,7 +28,10 @@ const LoginForm = ({ clousModal }) => {
     email: '',
     password: '',
   };
-
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const togglePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility);
+  };
   const onSubmit = values => {
     console.log(values.email);
     console.log(values.password);
@@ -61,17 +66,23 @@ const LoginForm = ({ clousModal }) => {
               <FormInput type="email" name="email" placeholder="Email" />
               <ErrorMessage name="email" component="div" className="error" />
             </LabelEnter>
-            <LabelEnter style={{ position: 'relative' }}>
+            <LabelEnterPassword>
               <FormInput
-                type="password"
+                type={!passwordVisibility ? 'password' : 'text'}
                 name="password"
                 placeholder="Password"
               />
-              <EyeIcon>
-                <img src={VisibilityIcon} alt="icon" />
-              </EyeIcon>
+              <ButtonpasswordVisibility
+                type="button"
+                onClick={togglePasswordVisibility}
+              >
+                <img
+                  src={passwordVisibility ? VisibilityIcon : NoVisibilityIcon}
+                  alt="icon"
+                />
+              </ButtonpasswordVisibility>
               <ErrorMessage name="password" component="div" className="error" />
-            </LabelEnter>
+            </LabelEnterPassword>
             <ButtonModalSubmit type="submit">Log In</ButtonModalSubmit>
           </Form>
         )}
