@@ -1,20 +1,24 @@
 {
   "files": {
     "main.css": "/nanny-services/static/css/main.4b4dba9c.css",
-    "main.js": "/nanny-services/static/js/main.ed831b7b.js",
+    "main.js": "/nanny-services/static/js/main.b97b42c2.js",
     "static/media/fon.jpg": "/nanny-services/static/media/fon.c6d80cf6f8e60f653e90.jpg",
+    "static/media/eye-off.svg": "/nanny-services/static/media/eye-off.ed8221d9e58d35e1873bf32bafb5fad2.svg",
     "index.html": "/nanny-services/index.html",
+    "static/media/heartgreen.svg": "/nanny-services/static/media/heartgreen.734b51dafde9d8cc1ba11690beb57edd.svg",
+    "static/media/heart.svg": "/nanny-services/static/media/heart.79c0771c7cfe81f27cf67aaea1c26036.svg",
     "static/media/map-pin.svg": "/nanny-services/static/media/map-pin.eee6c02b6ecff8680d721ff61160e01b.svg",
+    "static/media/eye.svg": "/nanny-services/static/media/eye.46ff42a5ff3c1562b3b51bbfe3903611.svg",
     "static/media/arrow.svg": "/nanny-services/static/media/arrow.398fa065838a4c550b188941f7f9df2a.svg",
     "static/media/person.svg": "/nanny-services/static/media/person.8bcbd25a35d14ad0858b87e4cfe81b58.svg",
     "static/media/star.svg": "/nanny-services/static/media/star.1e862e5ef32541008883aa0ad288f528.svg",
     "static/media/check.svg": "/nanny-services/static/media/check.832ded3085c8ca7646f0966c3967844d.svg",
     "static/media/x.svg": "/nanny-services/static/media/x.deb20e5da737e93121346cb3855e8f21.svg",
     "main.4b4dba9c.css.map": "/nanny-services/static/css/main.4b4dba9c.css.map",
-    "main.ed831b7b.js.map": "/nanny-services/static/js/main.ed831b7b.js.map"
+    "main.b97b42c2.js.map": "/nanny-services/static/js/main.b97b42c2.js.map"
   },
   "entrypoints": [
     "static/css/main.4b4dba9c.css",
-    "static/js/main.ed831b7b.js"
+    "static/js/main.b97b42c2.js"
   ]
 }
