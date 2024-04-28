@@ -26,6 +26,7 @@ import Heart from '../../data/heart.svg';
 import HeartGreen from '../../data/heartgreen.svg';
 
 import ModalSkelet from 'components/Modal/ModalSkelet';
+import MakeForm from 'components/RegisterForm/MakeForm';
 function calculateAge(birthDate) {
   const birthDateObj = new Date(birthDate);
   const currentDate = new Date();
@@ -186,7 +187,7 @@ export const NannyCard = ({ nannyData }) => {
               <Titles>Your nanny</Titles>
               <h2>{name}</h2>
             </ListInfo>
-            {/* <RegistrationForm clousModal={toggleModal} /> */}
+            <MakeForm clousModal={toggleModal} />
           </div>
         }
       />
