@@ -23,11 +23,11 @@ export default function Nanny() {
       case 'Z to A':
         setFilteredData([...data].sort((a, b) => b.name.localeCompare(a.name)));
         break;
-      case 'Less than 10$':
-        setFilteredData(data.filter(item => item.price_per_hour < 10));
+      case 'Less than 15$':
+        setFilteredData(data.filter(item => item.price_per_hour <= 15));
         break;
-      case 'Greater than 10$':
-        setFilteredData(data.filter(item => item.price_per_hour > 10));
+      case 'Greater than 15$':
+        setFilteredData(data.filter(item => item.price_per_hour > 15));
         break;
       case 'Popular':
         setFilteredData([...data].sort((a, b) => b.rating - a.rating));

@@ -4,6 +4,7 @@ const initialState = {
   token: null,
   id: null,
   name: null,
+  favorites: [],
 };
 const userSlice = createSlice({
   name: 'user',

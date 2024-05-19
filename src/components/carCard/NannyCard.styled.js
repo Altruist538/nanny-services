@@ -56,6 +56,7 @@ export const ListInfo = styled.ul`
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
+  margin-top: 20px;
 `;
 export const BlockCard = styled.div`
   position: relative;
@@ -72,6 +73,13 @@ export const Titles = styled.p`
   line-height: 125%;
   color: rgba(17, 16, 28, 0.5);
   margin-top: 25px;
+`;
+export const NameNammy = styled.p`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #11101c;
+  margin: 0;
 `;
 export const TitlesInfo = styled.span`
   font-family: var(--font-family);

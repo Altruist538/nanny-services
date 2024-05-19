@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AvatarImg,
   BlockCard,
@@ -18,6 +17,7 @@ import {
   ValueInfoGreen,
   BlockReviews,
   HeartButton,
+  NameNammy,
 } from './NannyCard.styled';
 import { ButtonLogIn, ModalText, ModalTitle } from '../../pages/pages.styled';
 import Star from '../../data/star.svg';
@@ -27,6 +27,8 @@ import HeartGreen from '../../data/heartgreen.svg';
 
 import ModalSkelet from 'components/Modal/ModalSkelet';
 import MakeForm from 'components/RegisterForm/MakeForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavorite, removeFavorite } from '../../store/favoritesSlice';
 function calculateAge(birthDate) {
   const birthDateObj = new Date(birthDate);
   const currentDate = new Date();
@@ -35,10 +37,22 @@ function calculateAge(birthDate) {
   const age = Math.abs(ageMs.getUTCFullYear() - 1970);
   return age;
 }
-export const NannyCard = ({ nannyData }) => {
+export const NannyCard = ({ nannyData, restartStatus }) => {
   const [isOpenReviews, setIsOpenReviews] = useState(false);
   const [isOpenRegistr, setIsOpenRegistr] = useState(false);
-  const [isOpenHeart, setIsOpenHeart] = useState(false);
+
+  const dispatch = useDispatch();
+  const favorites = useSelector(state => state.favorites);
+  const status = favorites.some(item => item.name === nannyData.name);
+  const [isOpenHeart, setIsOpenHeart] = useState(status);
+  console.log(status);
+  // const [favorites, setFavorites] = useState(useSelector(state => state.favorites);
+
+  // useEffect(() => {
+  //   if (!isOpenHeart) {
+  //     dispatch(removeFavorite(nannyData));
+  //   }
+  // }, [isOpenHeart]);
   const toggleReviews = event => {
     event.preventDefault();
     setIsOpenReviews(!isOpenReviews);
@@ -46,7 +60,7 @@ export const NannyCard = ({ nannyData }) => {
   if (!nannyData) {
     return null;
   }
-  // console.log(nannyData);
+
   const {
     name,
     avatar_url,
@@ -61,6 +75,7 @@ export const NannyCard = ({ nannyData }) => {
     characters,
     rating,
   } = nannyData;
+
   const СharactersString = characters
     .map(item => item.charAt(0).toUpperCase() + item.slice(1))
     .join(', ');
@@ -68,9 +83,18 @@ export const NannyCard = ({ nannyData }) => {
   const toggleModal = () => {
     setIsOpenRegistr(!isOpenRegistr);
   };
-  const toggleHeart = () => {
+
+  const toggleFavorite = () => {
+    if (status) {
+      dispatch(removeFavorite(nannyData));
+    } else {
+      dispatch(addFavorite(nannyData));
+    }
     setIsOpenHeart(!isOpenHeart);
+    restartStatus();
   };
+
+  console.log(favorites);
   return (
     <Container>
       <AvatarImg src={avatar_url} alt="Avatar nanny" />
@@ -99,7 +123,9 @@ export const NannyCard = ({ nannyData }) => {
         <ListInfo>
           <ModuleInfo>
             <TitlesInfo>Age:</TitlesInfo>
-            <ValueInfo>{age}</ValueInfo>
+            <ValueInfo>
+              <u>{age}</u>
+            </ValueInfo>
           </ModuleInfo>
           <ModuleInfo>
             <TitlesInfo>Experience:</TitlesInfo>
@@ -156,7 +182,7 @@ export const NannyCard = ({ nannyData }) => {
             </>
           )}
         </BlockReviews>
-        <HeartButton type="button" onClick={toggleHeart}>
+        <HeartButton type="button" onClick={toggleFavorite}>
           <img
             width="26"
             height="26"
@@ -184,8 +210,10 @@ export const NannyCard = ({ nannyData }) => {
                 height="64"
                 alt="Avatar nanny"
               />
-              <Titles>Your nanny</Titles>
-              <h2>{name}</h2>
+              <BlockReviews>
+                <Titles>Your nanny</Titles>
+                <NameNammy>{name}</NameNammy>
+              </BlockReviews>
             </ListInfo>
             <MakeForm clousModal={toggleModal} />
           </div>

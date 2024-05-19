@@ -34,6 +34,7 @@ export function useAuth() {
     email,
     token,
     id,
+
     setIsAuth,
     removeAuth,
   };

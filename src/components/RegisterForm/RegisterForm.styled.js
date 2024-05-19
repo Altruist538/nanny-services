@@ -4,7 +4,7 @@ export const FormInput = styled(Field)`
   border: 1px solid rgba(17, 16, 28, 0.1);
   border-radius: 12px;
   padding: 16px 37px 16px 18px;
-  width: 438px;
+
   height: 52px;
   &::placeholder {
     font-weight: 400;
@@ -13,7 +13,17 @@ export const FormInput = styled(Field)`
     color: #11101c;
   }
 `;
-
+export const FormInputSmall = styled(FormInput)`
+  width: 232px;
+`;
+export const FormInputComment = styled(FormInput)`
+  height: 116px;
+`;
+export const BlockOne = styled.div`
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+`;
 export const LabelEnter = styled.label`
   display: flex;
   flex-direction: column;
@@ -30,6 +40,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  width: 472px;
 `;
 export const ButtonModalSubmit = styled.button`
   background-color: #10393133;

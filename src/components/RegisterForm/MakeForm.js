@@ -6,8 +6,9 @@ import {
   LabelEnter,
   FormInput,
   ButtonModalSubmit,
-  LabelEnterPassword,
-  ButtonpasswordVisibility,
+  BlockOne,
+  FormInputSmall,
+  FormInputComment,
 } from './RegisterForm.styled';
 import {
   getAuth,
@@ -27,6 +28,8 @@ const validationSchema = Yup.object().shape({
 
 const MakeForm = ({ clousModal }) => {
   const [meetingTime, setMeetingTime] = useState('00:00');
+  const [telValue, setTelValue] = useState('');
+
   const initialValues = {
     address: '',
     tel: '',
@@ -34,6 +37,11 @@ const MakeForm = ({ clousModal }) => {
     mathersname: '',
     time: '',
     childage: '',
+    comment: '',
+  };
+  const handleChangeTel = e => {
+    const value = e.target.value;
+    setTelValue(value);
   };
   const handleChange = e => {
     setMeetingTime(e.target.value);
@@ -68,32 +76,54 @@ const MakeForm = ({ clousModal }) => {
       >
         {({ touched, errors }) => (
           <Form>
-            <LabelEnter>
-              <FormInput type="text" name="address" placeholder="Address" />
-              <ErrorMessage name="address" component="div" className="error" />
-            </LabelEnter>
-            <LabelEnter>
-              <FormInput type="tel" name="tel" placeholder="+380" />
-              <ErrorMessage name="tel" component="div" className="error" />
-            </LabelEnter>
-            <LabelEnter>
-              <FormInput
-                type="time"
-                name="time"
-                value={meetingTime}
-                step="1800"
-                onChange={handleChange}
-              />
-              <ErrorMessage name="time" component="div" className="error" />
-            </LabelEnter>
-            <LabelEnter>
-              <FormInput
-                type="number"
-                name="childage"
-                placeholder="Child's age"
-              />
-              <ErrorMessage name="childage" component="div" className="error" />
-            </LabelEnter>
+            {' '}
+            <BlockOne>
+              <LabelEnter>
+                <FormInputSmall
+                  type="text"
+                  name="address"
+                  placeholder="Address"
+                />
+                <ErrorMessage
+                  name="address"
+                  component="div"
+                  className="error"
+                />
+              </LabelEnter>
+              <LabelEnter>
+                <FormInputSmall
+                  type="tel"
+                  name="tel"
+                  pattern="[+380]{1}[\s-]?[0-9]{2}[\s-]?[0-9]{3}[\s-]?[0-9]{2}[\s-]?[0-9]{2}"
+                  placeholder="+380"
+                  value={telValue}
+                  onChange={handleChangeTel}
+                />
+                <ErrorMessage name="tel" component="div" className="error" />
+              </LabelEnter>
+              <LabelEnter>
+                <FormInputSmall
+                  type="number"
+                  name="childage"
+                  placeholder="Child's age"
+                />
+                <ErrorMessage
+                  name="childage"
+                  component="div"
+                  className="error"
+                />
+              </LabelEnter>
+              <LabelEnter>
+                <FormInputSmall
+                  type="time"
+                  name="time"
+                  value={meetingTime}
+                  minutes-step="30"
+                  onChange={handleChange}
+                />
+                <ErrorMessage name="time" component="div" className="error" />
+              </LabelEnter>
+            </BlockOne>
             <LabelEnter>
               <FormInput
                 type="text"
@@ -110,7 +140,15 @@ const MakeForm = ({ clousModal }) => {
               <FormInput type="email" name="email" placeholder="Email" />
               <ErrorMessage name="email" component="div" className="error" />
             </LabelEnter>
-
+            <LabelEnter>
+              <FormInputComment
+                as="textarea"
+                type="text"
+                name="comment"
+                placeholder="Comment"
+              />
+              <ErrorMessage name="comment" component="div" className="error" />
+            </LabelEnter>
             <ButtonModalSubmit type="submit">Send</ButtonModalSubmit>
           </Form>
         )}
