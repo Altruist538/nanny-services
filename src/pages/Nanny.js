@@ -5,41 +5,17 @@ import Header from '../components/Header/header';
 import { NannyCard } from 'components/carCard/NannyCard';
 import options from '../data/options';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import { applyFilter } from 'hooks/filter';
 
 export default function Nanny() {
   const [dataAllNanny, setDataAllNanny] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const indexOfFirstItem = 0;
   const [filteredData, setFilteredData] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState('Show all');
-  const applyFilter = (filter, data) => {
-    switch (filter) {
-      case 'A to Z':
-        setFilteredData([...data].sort((a, b) => a.name.localeCompare(b.name)));
-        break;
-      case 'Z to A':
-        setFilteredData([...data].sort((a, b) => b.name.localeCompare(a.name)));
-        break;
-      case 'Less than 15$':
-        setFilteredData(data.filter(item => item.price_per_hour <= 15));
-        break;
-      case 'Greater than 15$':
-        setFilteredData(data.filter(item => item.price_per_hour > 15));
-        break;
-      case 'Popular':
-        setFilteredData([...data].sort((a, b) => b.rating - a.rating));
-        break;
-      case 'Not popular':
-        setFilteredData([...data].sort((a, b) => a.rating - b.rating));
-        break;
-      default:
-        setFilteredData(data);
-        break;
-    }
-  };
+
   useEffect(() => {
     const fetchData = () => {
       const db = getDatabase();
@@ -48,7 +24,7 @@ export default function Nanny() {
         const data = snapshot.val();
         if (data) {
           setDataAllNanny(data);
-          applyFilter(selectedFilter, data);
+          setFilteredData(applyFilter(selectedFilter, data));
         }
       });
       return () => unsubscribe();
@@ -59,10 +35,12 @@ export default function Nanny() {
 
   const handleStatusSelect = status => {
     setSelectedFilter(status);
+    setFilteredData(applyFilter(status, dataAllNanny));
   };
+
   const paginate = pageNumber => setCurrentPage(pageNumber);
-  console.log(dataAllNanny);
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <Container>
       <Header />
