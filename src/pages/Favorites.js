@@ -16,18 +16,17 @@ export default function Favorites() {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState('Show all');
   const favorite = useSelector(state => state.favorites);
-  const [favorites, setFavorites] = useState(favorite);
 
   useEffect(() => {
     const fetchData = () => {
-      if (favorites) {
-        setDataAllNanny(favorites);
-        setFilteredData(applyFilter(selectedFilter, favorites));
+      if (favorite) {
+        setDataAllNanny(favorite);
+        setFilteredData(applyFilter(selectedFilter, favorite));
       }
     };
 
     fetchData();
-  }, [favorites, selectedFilter]);
+  }, [favorite, selectedFilter]);
 
   const handleStatusSelect = status => {
     setSelectedFilter(status);
