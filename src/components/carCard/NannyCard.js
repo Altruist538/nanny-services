@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   AvatarImg,
   BlockCard,
@@ -18,6 +18,9 @@ import {
   BlockReviews,
   HeartButton,
   NameNammy,
+  FullName,
+  TitlesSmall,
+  AvatarImgSmall,
 } from './NannyCard.styled';
 import { ButtonLogIn, ModalText, ModalTitle } from '../../pages/pages.styled';
 import Star from '../../data/star.svg';
@@ -119,7 +122,7 @@ export const NannyCard = ({ nannyData, restartStatus }) => {
             </ModuleInfoTop>
           </ListInfoTop>
         </BlockInfo>
-        <h2>{name}</h2>
+        <FullName>{name}</FullName>
         <ListInfo>
           <ModuleInfo>
             <TitlesInfo>Age:</TitlesInfo>
@@ -204,14 +207,14 @@ export const NannyCard = ({ nannyData, restartStatus }) => {
               form below so we can match you with the perfect care partner.
             </ModalText>
             <ListInfo>
-              <AvatarImg
+              <AvatarImgSmall
                 src={avatar_url}
                 width="16"
                 height="64"
                 alt="Avatar nanny"
               />
               <BlockReviews>
-                <Titles>Your nanny</Titles>
+                <TitlesSmall>Your nanny</TitlesSmall>
                 <NameNammy>{name}</NameNammy>
               </BlockReviews>
             </ListInfo>

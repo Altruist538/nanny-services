@@ -73,6 +73,14 @@ export const Titles = styled.p`
   line-height: 125%;
   color: rgba(17, 16, 28, 0.5);
   margin-top: 25px;
+  margin-bottom: 0;
+`;
+export const TitlesSmall = styled.p`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  color: #8a8a89;
+  margin: 0;
 `;
 export const NameNammy = styled.p`
   font-weight: 500;
@@ -150,6 +158,13 @@ export const ReviewerName = styled.p`
   color: #11101c;
   margin: 0;
 `;
+export const FullName = styled.p`
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  color: #11101c;
+  margin: 8px;
+`;
 export const BigllInfoPpice = styled.p`
   margin-top: 14px;
   margin-bottom: 8px;
@@ -196,6 +211,16 @@ export const AvatarImg = styled.img`
   padding: 12px;
   border: 2px solid rgba(240, 63, 59, 0.2);
   border-radius: 30px;
+`;
+export const AvatarImgSmall = styled.img`
+  border-radius: 15px;
+  width: 44px;
+  height: 44px;
+  /* width: 120px;
+  height: 120px;
+  padding: 12px; */
+  /* border: 2px solid rgba(240, 63, 59, 0.2); */
+  /* border-radius: 30px; */
 `;
 export const ButtonMore = styled.a`
   font-weight: 500;
