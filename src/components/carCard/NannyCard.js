@@ -40,7 +40,7 @@ function calculateAge(birthDate) {
   const age = Math.abs(ageMs.getUTCFullYear() - 1970);
   return age;
 }
-export const NannyCard = ({ nannyData, restartStatus }) => {
+export const NannyCard = ({ nannyData }) => {
   const [isOpenReviews, setIsOpenReviews] = useState(false);
   const [isOpenRegistr, setIsOpenRegistr] = useState(false);
 
@@ -94,7 +94,6 @@ export const NannyCard = ({ nannyData, restartStatus }) => {
       dispatch(addFavorite(nannyData));
     }
     setIsOpenHeart(!isOpenHeart);
-    restartStatus();
   };
 
   console.log(favorites);
